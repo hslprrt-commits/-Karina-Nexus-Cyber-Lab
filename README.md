@@ -47,3 +47,13 @@ karina-nexus-cyber-lab/
 
 ## Real AI integration
 GitHub Pages is static hosting. To connect a real AI provider, create a separate backend/API and store the provider key as a server-side secret. Never put API keys in `script.js` or other public files.
+
+
+## Deploy Karina AI with Grok on Vercel
+1. Import this repository/project into Vercel. Keep `index.html`, `script.js`, `styles.css`, and the `api/` directory in the project root (or the project root set to this folder).
+2. In Vercel, open **Settings → Environment Variables** and add `XAI_API_KEY` with your xAI API key. Select Production (and Preview if needed). Never put the key in `index.html`, `script.js`, GitHub, or chat.
+3. Deploy or redeploy the project. The frontend calls `/api/chat`, so the website and API must be hosted on the same Vercel project/domain for this configuration.
+4. Open the deployed Vercel URL and test Karina AI with a harmless question. API usage may incur charges depending on your xAI account/credits; check your xAI console.
+5. Do not submit passwords, personal information, or secrets to the AI. Consider adding rate limiting before sharing the public URL.
+
+The serverless endpoint is `api/chat.js`. It accepts POST JSON `{ "message": "..." }`, enforces a 4,000-character limit, and reads `XAI_API_KEY` only from the server environment.
